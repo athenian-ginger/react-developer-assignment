@@ -1,14 +1,15 @@
-import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { renderWithProviders } from "../../../utils/test-utils";
 import FilmsHeader from "../FilmsHeader";
-import { Provider } from "react-redux";
-import store from "../../../store/store";
 
-test("checks if dropdown exists", () => {
-  render(
-    <Provider store={store}>
-      <FilmsHeader />
-    </Provider>
-  );
+test("the sort field is displayed", () => {
+  const { getByLabelText } = renderWithProviders(<FilmsHeader />);
 
-  expect(screen.getByLabelText("Sort films")).toBeDefined();
+  expect(getByLabelText("Sort films")).toBeInTheDocument();
+});
+
+test("the search field displayed", () => {
+  const { getByLabelText } = renderWithProviders(<FilmsHeader />);
+
+  expect(getByLabelText("Search films")).toBeInTheDocument();
 });
